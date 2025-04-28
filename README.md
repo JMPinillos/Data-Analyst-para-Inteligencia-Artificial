@@ -297,21 +297,19 @@ Una vez cargados los datos, se calcula el valor mínimo y máximo de los arancel
 
 #### 4.3.3 Leyenda del mapa
 
-Para interpretar los colores del mapa, se incorpora una leyenda generada mediante la función reutilizable Legend, que será explicada en el apartado **4.4**. Esta leyenda se posiciona en la esquina inferior derecha del SVG y adapta dinámicamente su escala al rango de valores del conjunto de datos.
+Para interpretar los colores del mapa, se incorpora una leyenda generada mediante la función reutilizable `Legend`, que será explicada en el apartado **4.4**. Esta leyenda se posiciona en la esquina inferior derecha del SVG y adapta dinámicamente su escala al rango de valores del conjunto de datos.
 
 
 
 ```javascript
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+    const legend = Legend(colorScale, {
+        title: "Arancel aplicado (%)",
+        width: 300
+    });
+
+    svg.append(() => legend)
+        .attr("transform", `translate(${widthMapa - 340}, ${heightMapa - 50})`);
 ```
-
-
-
-​    const legend =  Legend(colorScale, {      title: "Arancel aplicado (%)",      width: 300    });       svg.append(() => legend)      .attr("transform",  `translate(${widthMapa - 340}, ${heightMapa - 50})`);  
 
  
 
@@ -319,53 +317,61 @@ Para interpretar los colores del mapa, se incorpora una leyenda generada mediant
 
 <center><i>Figura 2. Leyenda del mapa</i></center>
 
-
-
  
 
 #### 4.3.4 Representación del mapa
 
-El mapa mundial se construye a partir de un fichero GeoJSON remoto, que contiene las fronteras geográficas de los países. Cada país se representa como una ruta (<path>), a la cual se le asigna un color en función de su valor de arancel.
-
-
+El mapa mundial se construye a partir de un fichero `GeoJSON` remoto, que contiene las fronteras geográficas de los países. Cada país se representa como una ruta (`<path>`), a la cual se le asigna un color en función de su valor de arancel.
 
 ```javascript
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+    d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+        .then(world => {
+
+            const tooltip = d3.select("#tooltip_mapa");
+
+            svg.append("g")
+                .selectAll("path")
+                .data(world.features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+                .attr("class", "country")
+                .attr("fill", d => {
+                    const nombre = d.properties.name;
+                    const valor = aranceles.get(nombre);
+                    return valor != null ? colorScale(valor) : "#e0e0e0";
+                })
 ```
 
+Cada país recibe el color correspondiente a su valor de arancel, y los que no tienen datos se muestran en gris claro (`#e0e0e0`).
 
 
-​    d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")      .then(world => {           const tooltip = d3.select("#tooltip_mapa");           svg.append("g")          .selectAll("path")          .data(world.features)          .enter()          .append("path")          .attr("d", path)          .attr("class", "country")          .attr("fill", d => {            const nombre =  d.properties.name;            const valor =  aranceles.get(nombre);            return valor != null ? colorScale(valor) :  "#e0e0e0";          })  
-
-Cada país recibe el color correspondiente a su valor de arancel, y los que no tienen datos se muestran en gris claro (#e0e0e0).
-
-
-
- 
 
 #### 4.3.5 Interactividad con tooltip
 
 Se ha añadido un sistema de interacción que permite mostrar un *tooltip* con el nombre del país y su arancel correspondiente cuando el usuario pasa el cursor por encima. El *tooltip* se desplaza dinámicamente con el cursor.
 
-
-
 ```javascript
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+                .on("mouseover", function (event, d) {
+                    const nombre = d.properties.name;
+                    const valor = aranceles.get(nombre);
+
+                    d3.select(this).classed("highlight", true);
+
+                    tooltip
+                        .style("opacity", 1)
+                        .html(`<strong>${nombre}</strong><br>${valor != null ? valor + "%" : "Sin datos"}`);
+                })
+                .on("mousemove", function (event) {
+                    tooltip
+                        .style("left", `${event.pageX + 10}px`)
+                        .style("top", `${event.pageY - 28}px`);
+                })
+                .on("mouseout", function () {
+                    d3.select(this).classed("highlight", false);
+                    tooltip.style("opacity", 0);
+                });
 ```
-
-
-
-​          .on("mouseover", function (event, d) {            const nombre = d.properties.name;            const valor =  aranceles.get(nombre);               d3.select(this).classed("highlight", true);               tooltip              .style("opacity",  1)              .html(`<strong>${nombre}</strong><br>${valor != null ? valor + "%" : "Sin  datos"}`);          })          .on("mousemove", function (event) {              tooltip                .style("left", `${event.pageX + 10}px`)              .style("top", `${event.pageY - 28}px`);          })          .on("mouseout", function () {            d3.select(this).classed("highlight",  false);            tooltip.style("opacity", 0);          });  
-
-
 
 
 
@@ -376,10 +382,6 @@ Se ha añadido un sistema de interacción que permite mostrar un *tooltip* con e
 
 
 Este sistema mejora la experiencia del usuario al permitir la exploración individual de cada país con detalle y sin sobrecargar el mapa con etiquetas visibles.
-
-
-
- 
 
 La siguiente imagen muestra una vista general del mapa interactivo, donde se representan los aranceles aplicados por Estados Unidos mediante una escala cromática continua.
 
@@ -393,39 +395,37 @@ La siguiente imagen muestra una vista general del mapa interactivo, donde se rep
 
 #### 4.3.6 Legend.js
 
-Para complementar las visualizaciones de datos, se ha desarrollado un módulo independiente llamado Legend.js, que contiene una función reutilizable encargada de generar de forma automática una leyenda continua basada en escalas de color interpoladas.
+Para complementar las visualizaciones de datos, se ha desarrollado un módulo independiente llamado `Legend.js`, que contiene una función reutilizable encargada de generar de forma automática una leyenda continua basada en escalas de color interpoladas.
 
 El propósito de esta función es ofrecer al usuario una referencia visual clara que permita interpretar el significado de los colores aplicados en gráficos como el mapa de aranceles. De este modo, se facilita la comprensión de los rangos numéricos asociados a cada color representado en las visualizaciones.
 
-Desde el punto de vista técnico, la función Legend recibe como parámetros una escala de color y una serie de opciones de personalización, como el título, el tamaño de los ticks del eje, el ancho y alto de la leyenda, o los márgenes internos.
-
-
-
- 
+Desde el punto de vista técnico, la función `Legend` recibe como parámetros una escala de color y una serie de opciones de personalización, como el título, el tamaño de los ticks del eje, el ancho y alto de la leyenda, o los márgenes internos.
 
 El procedimiento que sigue la función puede resumirse de la siguiente manera:
 
-·     Primero, se crea un contenedor SVG configurado con las dimensiones especificadas.
-
-·     Si la escala de color es continua (dispone de interpolador), se genera una imagen que simula el degradado de color a través de un elemento <canvas>, mediante la función auxiliar ramp. Esta imagen se incorpora al SVG como un <image>.
-
-·     Posteriormente, se añade un eje horizontal (*axis bottom*) en la parte inferior de la leyenda, indicando valores numéricos de referencia. Sobre el eje también se inserta el título de la leyenda.
-
-·     Finalmente, el SVG construido se devuelve para que pueda ser incrustado en el contenedor principal donde se necesite (por ejemplo, en el mapa de aranceles).
+- Primero, se crea un contenedor SVG configurado con las dimensiones especificadas.
+- Si la escala de color es continua (dispone de interpolador), se genera una imagen que simula el degradado de color a través de un elemento `<canvas>`, mediante la función auxiliar `ramp`. Esta imagen se incorpora al SVG como un `<image>`.
+- Posteriormente, se añade un eje horizontal (*axis bottom*) en la parte inferior de la leyenda, indicando valores numéricos de referencia. Sobre el eje también se inserta el título de la leyenda.
+- Finalmente, el SVG construido se devuelve para que pueda ser incrustado en el contenedor principal donde se necesite (por ejemplo, en el mapa de aranceles).
 
 Este diseño modular no solo permite reutilizar la leyenda en diferentes gráficos, sino que también garantiza su adaptación automática a cualquier rango de valores que pueda tener la escala de color.
 
-En el siguiente fragmento puede verse un ejemplo simplificado de cómo se utiliza esta función en el archivo mapa.js:
+En el siguiente fragmento puede verse un ejemplo simplificado de cómo se utiliza esta función en el archivo `mapa.js`:
 
+```javascript
+    const legend = Legend(colorScale, {
+        title: "Arancel aplicado (%)",
+        width: 300
+    });
 
+    svg.append(() => legend)
+        .attr("transform", `translate(${widthMapa - 340}, ${heightMapa - 50})`);
 
-​    const legend =  Legend(colorScale, {      title: "Arancel aplicado (%)",      width: 300    });       svg.append(() => legend)      .attr("transform",  `translate(${widthMapa - 340}, ${heightMapa - 50})`);  
+```
 
  
 
-Gracias a este enfoque, el mantenimiento y la flexibilidad del proyecto aumentan, ya que cualquier modificación en el aspecto de la leyenda puede hacerse directamente en Legend.js sin necesidad de alterar el resto de la lógica de visualización.
-
-
+Gracias a este enfoque, el mantenimiento y la flexibilidad del proyecto aumentan, ya que cualquier modificación en el aspecto de la leyenda puede hacerse directamente en `Legend.js` sin necesidad de alterar el resto de la lógica de visualización.
 
  
 
@@ -433,41 +433,60 @@ Gracias a este enfoque, el mantenimiento y la flexibilidad del proyecto aumentan
 
 Para representar el volumen de exportaciones de bienes de la Unión Europea hacia diferentes países, se ha desarrollado un gráfico de barras. Esta visualización permite una comparación clara y eficaz entre los distintos socios comerciales, destacando visualmente la importancia de cada uno en términos de volumen exportado.
 
-La construcción del gráfico comienza con la creación de un contenedor SVG dentro del div identificado como #barras_exportaciones. Este SVG tiene unas dimensiones de **960 píxeles de ancho** y **600 píxeles de alto**, definiendo así un espacio adecuado para mostrar un número elevado de categorías sin comprometer la legibilidad.
+La construcción del gráfico comienza con la creación de un contenedor SVG dentro del `div` identificado como `#barras_exportaciones`. Este SVG tiene unas dimensiones de **960 píxeles de ancho** y **600 píxeles de alto**, definiendo así un espacio adecuado para mostrar un número elevado de categorías sin comprometer la legibilidad.
 
-Dentro del SVG, se define un grupo <g> principal, desplazado mediante márgenes internos, que sirve como lienzo de trabajo para dibujar los ejes, las barras y demás elementos interactivos.
+Dentro del SVG, se define un grupo `<g>` principal, desplazado mediante márgenes internos, que sirve como lienzo de trabajo para dibujar los ejes, las barras y demás elementos interactivos.
 
-Los datos utilizados se cargan desde el archivo CSV:
-
-volumen_de_las_exportaciones_de_la_ue_a_otros_paises.csv. Durante la carga de datos, se realiza un preprocesamiento en el que los valores monetarios se transforman correctamente en números flotantes, reemplazando la coma decimal por el punto estándar de JavaScript.
+Los datos utilizados se cargan desde el archivo CSV: `volumen_de_las_exportaciones_de_la_ue_a_otros_paises.csv`. Durante la carga de datos, se realiza un preprocesamiento en el que los valores monetarios se transforman correctamente en números flotantes, reemplazando la coma decimal por el punto estándar de JavaScript.
 
 Para representar los datos, se emplean tres escalas:
 
-·     **Escala horizontal (x)** de tipo band, que organiza los nombres de los países en el eje inferior y define el ancho de cada barra con separación (padding) entre ellas.
+- **Escala horizontal (x)** de tipo `band`, que organiza los nombres de los países en el eje inferior y define el ancho de cada barra con separación (`padding`) entre ellas.
+- **Escala vertical (y)** de tipo `linear`, que sitúa la altura de cada barra en proporción directa al volumen de exportaciones.
+- **Escala de color secuencial**, que asigna a cada barra un color progresivo desde azul a rojo según su valor, usando el interpolador `d3.interpolateRgb`.
 
-·     **Escala vertical (y)** de tipo linear, que sitúa la altura de cada barra en proporción directa al volumen de exportaciones.
+Los ejes se generan utilizando las funciones `d3.axisBottom` (para el eje X) y `d3.axisLeft` (para el eje Y). Además, las etiquetas del eje X se rotan **45 grados** para evitar la superposición de nombres largos de países, mejorando así la legibilidad general.
 
-·     **Escala de color secuencial**, que asigna a cada barra un color progresivo desde azul a rojo según su valor, usando el interpolador d3.interpolateRgb.
-
-Los ejes se generan utilizando las funciones d3.axisBottom (para el eje X) y d3.axisLeft (para el eje Y). Además, las etiquetas del eje X se rotan **45 grados** para evitar la superposición de nombres largos de países, mejorando así la legibilidad general.
-
-Cada barra del gráfico representa un país exportador, y está vinculada a un evento mouseover que activa un **tooltip dinámico**. Este tooltip muestra el nombre del país y el valor total de exportación en millones de euros de forma detallada. Además, al pasar el cursor sobre una barra, se resalta visualmente mediante la aplicación de un contorno negro.
+Cada barra del gráfico representa un país exportador, y está vinculada a un evento `mouseover` que activa un **tooltip dinámico**. Este `tooltip` muestra el nombre del país y el valor total de exportación en millones de euros de forma detallada. Además, al pasar el cursor sobre una barra, se resalta visualmente mediante la aplicación de un contorno negro.
 
 El siguiente fragmento de código muestra la estructura utilizada para construir las barras:
 
-
-
 ```javascript
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+  gExport.selectAll(".bar")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("x", d => x(d["Parámetro"]))
+    .attr("y", d => y(d["€"]))
+    .attr("width", x.bandwidth())
+    .attr("height", d => heightExport - y(d["€"]))
+    .attr("fill", d => colorExport(d["€"]))
+
+    .on("mouseover", function (event, d) {
+      d3.select(this)
+        .attr("stroke", "#000")
+        .attr("stroke-width", 1.5);
+
+      const nombre = d.Parámetro;
+      const valor = d["€"] * 1000;
+
+      tooltip
+        .style("opacity", 1)
+        .html(`<strong>${nombre}</strong><br>${valor.toLocaleString("es-ES")} millones €`);
+    })
+
+    .on("mousemove", function (event) {
+      tooltip
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 28) + "px");
+    })
+
+    .on("mouseout", function () {
+      d3.select(this).attr("stroke", null);
+      tooltip.style("opacity", 0);
+    });
 ```
-
-
-
-   gExport.selectAll(".bar")    .data(data)    .enter()    .append("rect")    .attr("class", "bar")    .attr("x", d => x(d["Parámetro"]))    .attr("y", d => y(d["€"]))    .attr("width", x.bandwidth())    .attr("height", d => heightExport - y(d["€"]))    .attr("fill", d => colorExport(d["€"]))       .on("mouseover",  function (event, d) {     d3.select(this)      .attr("stroke", "#000")      .attr("stroke-width",  1.5);        const nombre = d.Parámetro;     const valor = d["€"] * 1000;        tooltip      .style("opacity",  1)      .html(`<strong>${nombre}</strong><br>${valor.toLocaleString("es-ES")} millones €`);    })       .on("mousemove", function (event) {     tooltip      .style("left", (event.pageX + 10) + "px")      .style("top", (event.pageY - 28) + "px");    })       .on("mouseout", function () {     d3.select(this).attr("stroke", null);     tooltip.style("opacity", 0);    });  
 
  
 
@@ -480,8 +499,6 @@ Este sistema de interacción mejora la experiencia del usuario, permitiéndole c
 <center><i>Figura 5. Gráfico de barras</i></center>
 
 
-
- 
 
 Al pasar el ratón sobre cualquier barra, se activa un tooltip emergente que proporciona detalles adicionales sobre las exportaciones específicas de cada país.
 
@@ -505,35 +522,47 @@ Para representar los principales productos que España exporta a Estados Unidos,
 
  
 
-El diagrama se construye dentro de un **SVG** añadido al div identificado como #graficoCircular. Las dimensiones iniciales del gráfico son de **600 píxeles de ancho** y **500 píxeles de alto**, aunque se añade un espacio extra en altura para permitir la correcta colocación de la leyenda bajo el gráfico.
+El diagrama se construye dentro de un **SVG** añadido al `div` identificado como `#graficoCircular`. Las dimensiones iniciales del gráfico son de **600 píxeles de ancho** y **500 píxeles de alto**, aunque se añade un espacio extra en altura para permitir la correcta colocación de la leyenda bajo el gráfico.
 
-Una vez cargado el conjunto de datos desde el archivo CSV exportaciones_espana_eeuu.csv, se preprocesan los valores para asegurarse de que sean tratados como números. Posteriormente, se define una escala de colores utilizando la interpolación d3.interpolateSpectral, que proporciona una gama cromática amplia y contrastada. Esta elección garantiza que cada categoría del gráfico tenga un color diferenciado y visualmente atractivo.
-
-
-
- 
+Una vez cargado el conjunto de datos desde el archivo CSV `exportaciones_espana_eeuu.csv`, se preprocesan los valores para asegurarse de que sean tratados como números. Posteriormente, se define una escala de colores utilizando la interpolación `d3.interpolateSpectral`, que proporciona una gama cromática amplia y contrastada. Esta elección garantiza que cada categoría del gráfico tenga un color diferenciado y visualmente atractivo.
 
 Para construir los sectores del gráfico, se emplean las funciones de D3:
 
-·     **d3.pie()**: convierte los datos de exportaciones en ángulos proporcionales que definen cada sector.
+- **d3.pie()**: convierte los datos de exportaciones en ángulos proporcionales que definen cada sector.
+- **d3.arc()**: genera las formas de los sectores, desde el centro hasta el borde exterior del círculo.
 
-·     **d3.arc()**: genera las formas de los sectores, desde el centro hasta el borde exterior del círculo.
-
-A continuación, se añaden las etiquetas centradas cerca del borde de cada sector. Las etiquetas solo aparecen para aquellos sectores suficientemente grandes, evitando así saturar la visualización. Para posicionar estos textos se utiliza un **generador de arcos adicional** llamado arcLabel.
-
-
+A continuación, se añaden las etiquetas centradas cerca del borde de cada sector. Las etiquetas solo aparecen para aquellos sectores suficientemente grandes, evitando así saturar la visualización. Para posicionar estos textos se utiliza un **generador de arcos adicional** llamado `arcLabel`.
 
 ```javascript
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+    const arc = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius - 10);
+
+    const arcLabel = d3.arc()
+        .innerRadius(radius * 0.75)
+        .outerRadius(radius * 0.75);
+
+    gArcs.append("path")
+        .attr("d", arc)
+        .attr("fill", d => colorPie(d.data.Categoría))
+        .on("mouseover", function (event, d) {
+            d3.select(this).attr("stroke", "#000").attr("stroke-width", 1.5);
+            tooltip
+                .style("opacity", 1)
+                .html(`<strong>${d.data.Categoría}</strong><br>${d.data.Valor.toLocaleString("es-ES")} millones €`);
+        })
+        .on("mousemove", function (event) {
+            tooltip
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function () {
+            d3.select(this).attr("stroke", null);
+            tooltip.style("opacity", 0);
+        });
 ```
 
 
-
-​    const arc = d3.arc()      .innerRadius(0)      .outerRadius(radius - 10);       const arcLabel = d3.arc()      .innerRadius(radius * 0.75)      .outerRadius(radius * 0.75);       gArcs.append("path")      .attr("d", arc)      .attr("fill", d =>  colorPie(d.data.Categoría))      .on("mouseover",  function (event, d) {        d3.select(this).attr("stroke", "#000").attr("stroke-width",  1.5);        tooltip          .style("opacity", 1)          .html(`<strong>${d.data.Categoría}</strong><br>${d.data.Valor.toLocaleString("es-ES")} millones €`);      })      .on("mousemove", function (event) {        tooltip          .style("left", (event.pageX + 10) + "px")          .style("top", (event.pageY - 28) + "px");      })      .on("mouseout", function () {        d3.select(this).attr("stroke", null);        tooltip.style("opacity", 0);      });  
 
 Este sistema de interacción mejora notablemente la experiencia del usuario, permitiéndole consultar los datos detallados de cada categoría al pasar el cursor sobre el sector correspondiente.
 
@@ -553,72 +582,66 @@ Además, se ha incorporado una leyenda bajo el gráfico, distribuida en dos colu
 
 <center><i>Figura 9. Leyenda del gráfico de tarta</i></center>
 
-
-
  
 
 ### 4.6 CSS
 
-Para lograr un diseño limpio, estructurado y responsive, se ha implementado una hoja de estilos personalizada que organiza y da formato a los diferentes apartados de la página web. El archivo style.css gestiona tanto la apariencia general de los textos y contenedores como el aspecto visual de los gráficos D3.
+Para lograr un diseño limpio, estructurado y *responsive*, se ha implementado una hoja de estilos personalizada que organiza y da formato a los diferentes apartados de la página web. El archivo style.css gestiona tanto la apariencia general de los textos y contenedores como el aspecto visual de los gráficos D3.
 
  
 
 #### 4.6.1 Reset CSS
 
-Se aplica un *reset* general sobre elementos HTML básicos (como body, div, h1, p, ul, etc.) para eliminar márgenes, paddings y bordes predeterminados. De esta forma, se asegura una base homogénea en todos los navegadores.
+Se aplica un *reset* general sobre elementos HTML básicos (como `body`, `div`, `h1`, `p`, `ul`, etc.) para eliminar márgenes, *paddings* y bordes predeterminados. De esta forma, se asegura una base homogénea en todos los navegadores.
 
 Ejemplo de *reset* aplicado:
 
-
-
 ```css
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
 ```
 
 
 
-  html, body, div, span, applet, object, iframe,  h1, h2, h3, h4, h5, h6, p, blockquote, pre, a {    margin: 0;    padding: 0;    border: 0;    outline: 0;    vertical-align: baseline;    background: transparent;  }  
-
 #### 4.6.2 Estilos comunes y utilidades
 
-Se definen clases genéricas como .no-padding, .no-margin, .relative, o .button, que se utilizan en diversas partes de la página para controlar espaciados y botones de acción.
+Se definen clases genéricas como `.no-padding`, `.no-margin`, `.relative`, o `.button`, que se utilizan en diversas partes de la página para controlar espaciados y botones de acción.
 
  
 
 #### 4.6.3 Estructura y disposición de la página
 
-Cada sección principal (inicio, mapa, exportaciones UE, exportaciones España) cuenta con su propio espaciado vertical (padding-top) para lograr una separación visual clara entre bloques.
- La clase .alt-bg se utiliza para alternar fondos ligeramente coloreados en algunas secciones.
+Cada sección principal (inicio, mapa, exportaciones UE, exportaciones España) cuenta con su propio espaciado vertical (`padding-top`) para lograr una separación visual clara entre bloques. La clase `.alt-bg` se utiliza para alternar fondos ligeramente coloreados en algunas secciones.
 
  
 
 #### 4.6.4 Estilización específica de las visualizaciones
 
-Los contenedores de los gráficos D3 (#mapa, #barras_exportaciones, #graficoCircular) comparten un estilo homogéneo basado en flexbox, fondo blanco, bordes suaves y sombreados ligeros.
+Los contenedores de los gráficos D3 (`#mapa`, `#barras_exportaciones`, `#graficoCircular`) comparten un estilo homogéneo basado en flexbox, fondo blanco, bordes suaves y sombreados ligeros.
 
 Ejemplo:
 
-
-
 ```css
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+#mapa, #barras_exportaciones, #graficoCircular {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+}
 ```
-
-
-
-  #mapa, #barras_exportaciones, #graficoCircular {    display: flex;    justify-content: center;    align-items: center;    background-color: #ffffff;    border: 1px solid #ccc;    box-shadow: 0 0 10px rgba(0,0,0,0.1);    padding: 10px;    width: fit-content;    height: fit-content;    margin: 0 auto;  }  
-
- 
-
-
 
  
 
@@ -626,25 +649,24 @@ Ejemplo:
 
 Se definen estilos para el mapa mundial interactivo:
 
-·     **.country** establece el color del borde de los países.
+- **`.country`** establece el color del borde de los países.
+- **`.country:hover`** aumenta el grosor del borde y aplica una sombra al pasar el cursor.
 
-·     **.country:hover** aumenta el grosor del borde y aplica una sombra al pasar el cursor.
-
-También se define .highlight para remarcar visualmente un país o una barra cuando el usuario interactúa:
-
-
+También se define `.highlight` para remarcar visualmente un país o una barra cuando el usuario interactúa:
 
 ```css
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+.country {
+    stroke: #999;
+    stroke-width: 0.5;
+    transition: stroke 0.2s, stroke-width 0.2s, filter 0.2s;
+}
+
+.country:hover {
+    stroke: #000;
+    stroke-width: 1.2;
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+}
 ```
-
-
-
-  .country {    stroke: #999;    stroke-width: 0.5;    transition: stroke 0.2s, stroke-width 0.2s, filter 0.2s;  }     .country:hover {    stroke: #000;    stroke-width: 1.2;    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));  }  
 
  
 
@@ -652,31 +674,32 @@ También se define .highlight para remarcar visualmente un país o una barra cua
 
 Se han diseñado tooltips flotantes con aspecto limpio, fondo blanco, bordes redondeados y sombras suaves, adaptados a cada visualización:
 
-
-
 ```css
-<script src ="https://d3js.org/d3.v6.min.js"></script>
-<script src ="assets/js/modules/legend.js" defer></script>
-<script src="assets/js/modules/mapa.js" defer></script>
-<script src="assets/js/modules/barras.js" defer></script>
-<script src="assets/js/modules/tarta.js" defer></script>
+.tooltip {
+    position: absolute;
+    opacity: 0;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    pointer-events: none;
+    transition: opacity 0.1s;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
 ```
 
 
 
-  .tooltip {    position: absolute;    opacity: 0;    background: white;    border: 1px solid #ccc;    padding: 6px 10px;    border-radius: 4px;    font-size: 13px;    pointer-events: none;    transition: opacity 0.1s;    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);  }  
-
 #### 4.6.7 Menú de navegación y footer
 
-La barra superior de navegación se mantiene fija (position: fixed) y está adaptada para dispositivos móviles.
+La barra superior de navegación se mantiene fija (`position: fixed`) y está adaptada para dispositivos móviles.
 
 El pie de página incluye enlaces secundarios y derechos de autor, todo estilizado de forma discreta y coherente con el diseño general.
 
  
 
-
-
-## 5.  CONCLUSIONES
+## 5. CONCLUSIONES
 
 La realización de esta actividad ha permitido integrar y aplicar de manera práctica los conocimientos adquiridos sobre visualización interactiva de datos en entornos web. A través del uso de la librería D3.js, se han desarrollado representaciones gráficas dinámicas que ofrecen una visión clara y comprensible de fenómenos complejos, como son los aranceles comerciales internacionales y los flujos de exportación entre regiones económicas.
 
@@ -686,14 +709,8 @@ El uso de D3.js ha demostrado ser especialmente ventajoso en este contexto. Su f
 
 Finalmente, cabe destacar que el desarrollo de esta actividad no solo ha reforzado competencias técnicas en programación y diseño web, sino también en análisis crítico de datos y en la comunicación visual de información compleja y habilidades esenciales en el ámbito de la ciencia de datos.
 
-
-
- 
-
  
 
 ## Referencias
 
 
-
- 
