@@ -28,10 +28,29 @@
 </p>
 
 
-
-## ÍNDICE
+<h2>ÍNDICE</h2>
 
 [TOC]
+
+<h2>ÍNDICE DE FIGURAS</h2>
+
+[Figura 1. Estructura del proyecto web](#Figura_1)
+
+[Figura 2. Leyenda del mapa](#Figura_2)
+
+[Figura 3. Tooltip del mapa desplegado](#Figura_3)
+
+[Figura 4. Mapa interactivo](#Figura_4)
+
+[Figura 5. Gráfico de barras](#Figura_5)
+
+[Figura 6. Tooltip del gráfico de barras desplegado](#Figura_6)
+
+[Figura 7. Gráfico de tarta](#Figura_7)
+
+[Figura 8. Tooltip del gráfico de tarta](#Figura_8)
+
+[Figura 9. Leyenda del gráfico de tarta](#Figura_9)
 
 
 
@@ -102,7 +121,7 @@ Todo el contenido se ha agrupado en una carpeta `assets`, que actúa como conten
 
  
 
-![Arbol_proyecto](docs/images/Arbol_proyecto.png)
+<img id="Figura_1" align="center" src="docs/images/Arbol_proyecto.png" alt="Arbol_proyecto" style="border: 1px solid black;"/>
 
 <center><i>Figura 1. Estructura del proyecto web</i></center>
 
@@ -313,7 +332,7 @@ Para interpretar los colores del mapa, se incorpora una leyenda generada mediant
 
  
 
-![Leyenda_mapa](docs/images/Leyenda_mapa.png)
+<img id="Figura_2" align="center" src="docs/images/Leyenda_mapa.png" alt="Leyenda_mapa" style="border: 1px solid black;"/>
 
 <center><i>Figura 2. Leyenda del mapa</i></center>
 
@@ -375,7 +394,7 @@ Se ha añadido un sistema de interacción que permite mostrar un *tooltip* con e
 
 
 
-![Tooltip_mapa](docs/images/Tooltip_mapa.png)
+<img id="Figura_3" align="center" src="docs/images/Tooltip_mapa.png" alt="Tooltip_mapa" style="border: 1px solid black;"/>
 
 <center><i>Figura 3. Tooltip del mapa desplegado</i></center>
 
@@ -387,7 +406,7 @@ La siguiente imagen muestra una vista general del mapa interactivo, donde se rep
 
 
 
-<img src="docs/images/Mapa.png" alt="Mapa" style="zoom:67%;" />
+<img id="Figura_4" align="center" src="docs/images/Mapa.png" alt="Mapa" style="zoom:67%;border: 1px solid black;"/>
 
 <center><i>Figura 4. Mapa interactivo</i></center>
 
@@ -494,7 +513,7 @@ Este sistema de interacción mejora la experiencia del usuario, permitiéndole c
 
 
 
-<img src="docs/images/Grafico_barras.png" alt="Grafico_barras" style="zoom: 67%;" />
+<img id="Figura_5" align="center" src="docs/images/Grafico_barras.png" alt="Grafico_barras" style="zoom: 67%; border: 1px solid black;" />
 
 <center><i>Figura 5. Gráfico de barras</i></center>
 
@@ -504,7 +523,7 @@ Al pasar el ratón sobre cualquier barra, se activa un tooltip emergente que pro
 
 
 
-![Tooltip_barras](docs/images/Tooltip_barras.png)
+<img id="Figura_6" align="center" src="docs/images/Tooltip_barras.png" alt="Tooltip_barras" style="border: 1px solid black;"/>
 
 <center><i>Figura 6. Tooltip del gráfico de barras desplegado</i></center>
 
@@ -516,7 +535,7 @@ Para representar los principales productos que España exporta a Estados Unidos,
 
  
 
-<img src="docs/images/Grafico_tarta_.png" alt="Grafico_tarta_" style="zoom: 67%;" />
+<img id="Figura_7" align="center" src="docs/images/Grafico_tarta_.png" alt="Grafico_tarta_" style="zoom: 67%; border: 1px solid black;"/>
 
 <center><i>Figura 7. Gráfico de tarta</i></center>
 
@@ -568,7 +587,7 @@ Este sistema de interacción mejora notablemente la experiencia del usuario, per
 
 
 
-<img src="docs/images/Tooltip_tarta.png" alt="Tooltip_tarta" style="zoom: 80%;" />
+<img id="Figura_8" align="center" src="docs/images/Tooltip_tarta.png" alt="Tooltip_tarta" style="zoom: 80%; border: 1px solid black;"/>
 
 <center><i>Figura 8. Tooltip del gráfico de tarta</i></center>
 
@@ -578,7 +597,7 @@ Además, se ha incorporado una leyenda bajo el gráfico, distribuida en dos colu
 
 
 
-![Leyenda_grafico_tarta](docs/images/Leyenda_grafico_tarta.png)
+<img id="Figura_9" align="center" src="docs/images/Leyenda_grafico_tarta.png" alt="Leyenda_grafico_tarta" style="border: 1px solid black;"/>
 
 <center><i>Figura 9. Leyenda del gráfico de tarta</i></center>
 
