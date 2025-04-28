@@ -29,17 +29,11 @@
 
 
 
- 
-
- 
-
- 
-
 ## ÍNDICE
 
 [TOC]
 
- 
+
 
 ## 1. INTRODUCCIÓN
 
@@ -75,9 +69,9 @@ En el caso del **gráfico de tarta**, se han utilizado datos específicos sobre 
 
 Finalmente, se proporcionarán enlaces de descarga directa a los conjuntos de datos utilizados, de manera que el usuario pueda acceder a las fuentes originales para su consulta o análisis posterior.
 
-\-     Enlace 1
-
-\-     Enlace 2
+- [aranceles_adaptados_d3.csv](https://github.com/JMPinillos/Data-Analyst-para-Inteligencia-Artificial/blob/main/assets/data/aranceles_adaptados_d3.csv)
+- [exportaciones_espana_eeuu.csv](https://github.com/JMPinillos/Data-Analyst-para-Inteligencia-Artificial/blob/main/assets/data/exportaciones_espana_eeuu.csv)
+- [volumen_de_las_exportaciones_de_la_ue_a_otros_paises.csv](https://github.com/JMPinillos/Data-Analyst-para-Inteligencia-Artificial/blob/main/assets/data/volumen_de_las_exportaciones_de_la_ue_a_otros_paises.csv)
 
  
 
@@ -93,33 +87,30 @@ La sección también incorpora explicaciones específicas sobre la generación d
 
 El diseño de la arquitectura de la web desarrollada para esta actividad responde a criterios de organización lógica, escalabilidad y claridad estructural. Para garantizar una buena mantenibilidad del proyecto y facilitar futuras ampliaciones, se ha optado por una distribución modular de los recursos en carpetas temáticas.
 
-La raíz del proyecto contiene el archivo principal index.html, que actúa como punto de entrada de la aplicación. Desde este archivo se cargan, de forma ordenada y diferida, los distintos módulos JavaScript encargados de generar las visualizaciones, así como los recursos de estilos y datos.
+La raíz del proyecto contiene el archivo principal `index.html`, que actúa como punto de entrada de la aplicación. Desde este archivo se cargan, de forma ordenada y diferida, los distintos módulos JavaScript encargados de generar las visualizaciones, así como los recursos de estilos y datos.
 
-Todo el contenido se ha agrupado en una carpeta assets, que actúa como contenedor principal de los recursos estáticos. Esta carpeta, a su vez, se subdivide en varias subcarpetas especializadas:
+Todo el contenido se ha agrupado en una carpeta `assets`, que actúa como contenedor principal de los recursos estáticos. Esta carpeta, a su vez, se subdivide en varias subcarpetas especializadas:
 
-·     **assets/css**: contiene las hojas de estilo utilizadas en el proyecto. Se incluye aquí tanto la hoja style.css con las reglas personalizadas como otras posibles hojas externas como fuentes o plantillas de Bootstrap si fueran necesarias.
-
-·     **assets/js**: alberga los scripts JavaScript divididos por funcionalidad. Esta división permite una separación clara de responsabilidades:
-
-o  **mapa.js** se encarga de generar y configurar el mapa de aranceles mundiales.
-
-o  **barras.js** contiene la lógica para construir el diagrama de barras de exportaciones de la UE.
-
-o  **tarta.js** genera el gráfico circular de exportaciones de España a Estados Unidos.
-
-o  **legend.js** define una función reutilizable para construir una leyenda continua a partir de una escala de color.
-
-·     **assets/data**: se encuentran los ficheros CSV que alimentan las visualizaciones. La separación de los datos respecto al código permite modificar fácilmente los valores sin tocar el código de representación.
-
-·     **assets/images**: incluye las imágenes del proyecto, como el logotipo institucional o cualquier recurso visual adicional.
+- **`assets/css`**: contiene las hojas de estilo utilizadas en el proyecto. Se incluye aquí tanto la hoja style.css con las reglas personalizadas como otras posibles hojas externas como fuentes o plantillas de Bootstrap si fueran necesarias.
+- **`assets/js`**: alberga los scripts JavaScript divididos por funcionalidad. Esta división permite una separación clara de responsabilidades:
+  - **`mapa.js`** se encarga de generar y configurar el mapa de aranceles mundiales.
+  - **`barras.js`** contiene la lógica para construir el diagrama de barras de exportaciones de la UE.
+  - **`tarta.js`** genera el gráfico circular de exportaciones de España a Estados Unidos.
+  - **`legend.js`** define una función reutilizable para construir una leyenda continua a partir de una escala de color.
+- **`assets/data`**: se encuentran los ficheros CSV que alimentan las visualizaciones. La separación de los datos respecto al código permite modificar fácilmente los valores sin tocar el código de representación.
+- **`assets/images`**: incluye las imágenes del proyecto, como el logotipo institucional o cualquier recurso visual adicional.
 
  
 
-Figura 1. Estructura del proyecto web
+![Arbol_proyecto](docs/images/Arbol_proyecto.png)
+
+<center><i>Figura 1. Estructura del proyecto web</i></center>
+
+
 
 Esta estructura modular evita la redundancia y mejora la claridad, ya que cada componente está claramente delimitado. Asimismo, garantiza que los elementos compartidos (como funciones auxiliares o estilos comunes) puedan reutilizarse fácilmente sin generar dependencias innecesarias entre los distintos gráficos.
 
-Además, este diseño facilita el trabajo colaborativo en entornos donde múltiples personas pueden editar partes distintas del proyecto. Por ejemplo, un desarrollador puede trabajar sobre los estilos sin afectar el código de visualización, o los datos pueden actualizarse de forma autónoma desde la carpeta data.
+Además, este diseño facilita el trabajo colaborativo en entornos donde múltiples personas pueden editar partes distintas del proyecto. Por ejemplo, un desarrollador puede trabajar sobre los estilos sin afectar el código de visualización, o los datos pueden actualizarse de forma autónoma desde la carpeta `data`.
 
 Por último, esta organización responde a prácticas estándar de desarrollo web, siendo fácilmente integrable en entornos más complejos como servidores estáticos, *frameworks front-end* o sistemas de control de versiones. En resumen, se trata de una estructura sencilla pero robusta, pensada para crecer sin comprometer la legibilidad ni la eficiencia del mantenimiento.
 
@@ -127,7 +118,7 @@ Por último, esta organización responde a prácticas estándar de desarrollo we
 
 ### 4.2 Index.htlm
 
-El archivo index.html constituye el núcleo de la estructura visible de la página web y actúa como punto de entrada para las diferentes visualizaciones desarrolladas mediante D3.js. Su diseño responde a un enfoque modular, claro y escalable, que permite integrar contenido textual, elementos interactivos y gráficos SVG sin comprometer la organización o el mantenimiento del proyecto.
+El archivo `index.html` constituye el núcleo de la estructura visible de la página web y actúa como punto de entrada para las diferentes visualizaciones desarrolladas mediante D3.js. Su diseño responde a un enfoque modular, claro y escalable, que permite integrar contenido textual, elementos interactivos y gráficos SVG sin comprometer la organización o el mantenimiento del proyecto.
 
 El documento está construido respetando los estándares de HTML5 y presenta una estructura organizada que incluye referencias externas a hojas de estilo CSS, bibliotecas de JavaScript y los módulos desarrollados para cada visualización. También incluye metaetiquetas informativas para optimizar la accesibilidad, la indexación y el rendimiento en navegadores modernos.
 
@@ -135,53 +126,67 @@ El documento está construido respetando los estándares de HTML5 y presenta una
 
 #### 4.2.1 Estructura del documento
 
-La estructura se compone de dos grandes bloques: <head> y <body>. En el bloque <head> se definen los metadatos, se vinculan los recursos externos y se cargan las librerías necesarias. En el <body> se organiza el contenido visible, distribuido en secciones semánticas que alojan las distintas visualizaciones y los textos explicativos correspondientes.
+La estructura se compone de dos grandes bloques: `<head>` y `<body>`. En el bloque <head> se definen los metadatos, se vinculan los recursos externos y se cargan las librerías necesarias. En el `<body>` se organiza el contenido visible, distribuido en secciones semánticas que alojan las distintas visualizaciones y los textos explicativos correspondientes.
 
-El encabezado incluye las etiquetas <meta> necesarias para definir el conjunto de caracteres, el diseño responsive y los metadatos de autor y descripción del proyecto:
+El encabezado incluye las etiquetas `<meta>` necesarias para definir el conjunto de caracteres, el diseño responsive y los metadatos de autor y descripción del proyecto:
 
-
-
-  <meta charset="UTF-8">    <meta name="viewport"  content="width=device-width,  initial-scale=1.0">    <meta name="author" content="JMPinillos">    <meta name="description" content="Aranceles  aplicados por EE.UU.">    <meta name="keywords" content="Aranceles,  comercio, Estados Unidos, Unión Europea, China, exportaciones">  
+```html
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="JMPinillos">
+<meta name="description" content="Aranceles aplicados por EE.UU.">
+<meta name="keywords" content="Aranceles, comercio, Estados Unidos, Unión Europea, China, exportaciones">
+```
 
  
 
 Además, se especifica el título del documento y se enlazan los estilos CSS:
 
-
-
-  <title>Aranceles EEUU VS World</title>  <link rel="stylesheet" href="assets/css/bootstrap.css">  <link rel="stylesheet" href="assets/css/font.css">  <link rel="stylesheet" href="assets/css/style.css">  
-
- 
-
-También se importa la librería D3.js desde su CDN oficial y se integran los *scripts* desarrollados para cada componente visual, definidos con el atributo defer para garantizar su carga asincrónica:
-
-
-
-  <script src ="https://d3js.org/d3.v6.min.js"></script>  <script src ="assets/js/modules/legend.js" defer></script>  <script src="assets/js/modules/mapa.js" defer></script>  <script src="assets/js/modules/barras.js" defer></script>  <script src="assets/js/modules/tarta.js" defer></script>  
+```html
+<title>Aranceles EEUU VS World</title>
+<link rel="stylesheet" href="assets/css/bootstrap.css">
+<link rel="stylesheet" href="assets/css/font.css">
+<link rel="stylesheet" href="assets/css/style.css">
+```
 
  
+
+También se importa la librería D3.js desde su CDN oficial y se integran los *scripts* desarrollados para cada componente visual, definidos con el atributo `defer` para garantizar su carga asincrónica:
+
+```html
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
+
+
 
 El cuerpo del documento está dividido en varias secciones diferenciadas, cada una de ellas con una estructura clara, contenido textual explicativo y un área destinada a contener una visualización interactiva generada mediante D3.js. Estas secciones están organizadas verticalmente dentro del archivo y son accesibles mediante navegación interna.
 
 
 
- 
-
 ##### 4.2.1.1 Menú de navegación
 
-La navegación principal está situada en la parte superior de la página y se presenta como una barra horizontal fija. Dentro de ella, se incluye una lista de elementos de navegación (<ul> con elementos <li>) que contienen enlaces internos (<a>) a las distintas secciones del sitio. Cada uno de estos enlaces permite al usuario desplazarse directamente a un bloque temático específico de la página: introducción, mapa, gráfico de barras o gráfico circular. Esta estructura favorece una experiencia de usuario fluida y organizada, especialmente útil en un entorno de una sola página (*single-page application*).
+La navegación principal está situada en la parte superior de la página y se presenta como una barra horizontal fija. Dentro de ella, se incluye una lista de elementos de navegación (`<ul>` con elementos `<li>`) que contienen enlaces internos (`<a>`) a las distintas secciones del sitio. Cada uno de estos enlaces permite al usuario desplazarse directamente a un bloque temático específico de la página: introducción, mapa, gráfico de barras o gráfico circular. Esta estructura favorece una experiencia de usuario fluida y organizada, especialmente útil en un entorno de una sola página (*single-page application*).
 
-
-
-  <ul class="nav nav-list  navbar-nav navbar-right">    <li><a class="nav-item"  href="#inicio">Inicio</a></li>    <li><a class="nav-item" href="#map">Mapa</a></li>    <li><a class="nav-item" href="#exportacionesUE">Aranceles</a></li>    <li><a class="nav-item" href="#exportacionesEspana">Exportaciones</a></li>  </ul>  
+```html
+<ul class="nav nav-list navbar-nav navbar-right">
+    <li><a class="nav-item" href="#inicio">Inicio</a></li>
+    <li><a class="nav-item" href="#map">Mapa</a></li>
+    <li><a class="nav-item" href="#exportacionesUE">Aranceles</a></li>
+    <li><a class="nav-item" href="#exportacionesEspana">Exportaciones</a></li>
+</ul>
+```
 
  
 
 ##### 4.2.1.2 Secciones de contenido
 
-Cada una de las secciones principales de la página está construida utilizando la estructura estándar de *Bootstrap*, basada en contenedores (<div class="container">), filas (<div class="row">) y columnas (<div class="col-md-12">, <div class="col-md-6">, etc.). Esta arquitectura permite una maquetación flexible y responsiva que se adapta correctamente a distintos tamaños de pantalla.
+Cada una de las secciones principales de la página está construida utilizando la estructura estándar de *Bootstrap*, basada en contenedores (`<div class="container">`), filas (`<div class="row">`) y columnas (`<div class="col-md-12">`, `<div class="col-md-6">`, etc.). Esta arquitectura permite una maquetación flexible y responsiva que se adapta correctamente a distintos tamaños de pantalla.
 
-Las secciones están identificadas mediante id únicos, lo que facilita el anclaje interno desde el menú de navegación superior. Cada sección tiene además una clase específica como inicio-section, map-section, exportacionesUE-section o exportacionesEspana-section, que permite aplicar estilos visuales diferenciados.
+Las secciones están identificadas mediante id únicos, lo que facilita el anclaje interno desde el menú de navegación superior. Cada sección tiene además una clase específica como `inicio-section`, `map-section`, `exportacionesUE-section` o `exportacionesEspana-section`, que permite aplicar estilos visuales diferenciados.
 
  
 
@@ -195,9 +200,8 @@ La sección de inicio está diseñada para ofrecer un encabezado llamativo, con 
 
 Esta sección contiene dos partes principales:
 
-·     Un bloque de texto explicativo con varios párrafos, donde se contextualiza el conflicto comercial, se citan fuentes periodísticas relevantes y se justifica la importancia del mapa.
-
-·     Un contenedor gráfico en el que se renderiza el mapa interactivo mediante D3.js. El mapa está insertado dentro de un div con el identificador mapa, y junto a él se sitúa un tooltip que aparece dinámicamente cuando el usuario interactúa con el gráfico.
+- Un bloque de texto explicativo con varios párrafos, donde se contextualiza el conflicto comercial, se citan fuentes periodísticas relevantes y se justifica la importancia del mapa.
+- Un contenedor gráfico en el que se renderiza el mapa interactivo mediante D3.js. El mapa está insertado dentro de un `div` con el identificador mapa, y junto a él se sitúa un `tooltip` que aparece dinámicamente cuando el usuario interactúa con el gráfico.
 
  
 
@@ -205,9 +209,8 @@ Esta sección contiene dos partes principales:
 
 Esta sección mantiene la misma estructura que la anterior:
 
-·     Una columna de texto en la que se describen los datos comerciales entre la Unión Europea y sus principales socios. Se incorporan cifras clave, evolución anual, y se cita la fuente oficial.
-
-Un bloque gráfico en el que se genera, dentro de un div específico, un gráfico de barras utilizando D3.js. También se incluye un tooltip que muestra información detallada al pasar el cursor sobre cada barra.
+- Una columna de texto en la que se describen los datos comerciales entre la Unión Europea y sus principales socios. Se incorporan cifras clave, evolución anual, y se cita la fuente oficial.
+- Un bloque gráfico en el que se genera, dentro de un `div` específico, un gráfico de barras utilizando D3.js. También se incluye un `tooltip` que muestra información detallada al pasar el cursor sobre cada barra.
 
  
 
@@ -215,67 +218,96 @@ Un bloque gráfico en el que se genera, dentro de un div específico, un gráfic
 
 Aquí se utiliza una disposición en dos columnas:
 
-o  En la parte izquierda se presenta el texto explicativo con datos concretos sobre los principales productos exportados por España a Estados Unidos. La estructura y el estilo siguen la línea de las secciones anteriores.
-
-o  En la parte derecha se sitúa el gráfico circular, representado en un div exclusivo (graficoCircular). Esta visualización también se acompaña de un tooltip, y se ha añadido una leyenda SVG para facilitar la interpretación del gráfico.
+- En la parte izquierda se presenta el texto explicativo con datos concretos sobre los principales productos exportados por España a Estados Unidos. La estructura y el estilo siguen la línea de las secciones anteriores.
+- En la parte derecha se sitúa el gráfico circular, representado en un `div` exclusivo (`graficoCircular`). Esta visualización también se acompaña de un `tooltip`, y se ha añadido una leyenda SVG para facilitar la interpretación del gráfico.
 
  
 
 ##### 4.2.1.7 Pie de página (*Footer*)
 
-El documento finaliza con una sección de pie de página estructurada también con *Bootstrap*, utilizando una disposición en dos columnas dentro de un contenedor. Esta sección, delimitada mediante la clase footer-section, cumple una función informativa y estética, cerrando visualmente la página con coherencia y limpieza.
+El documento finaliza con una sección de pie de página estructurada también con *Bootstrap*, utilizando una disposición en dos columnas dentro de un contenedor. Esta sección, delimitada mediante la clase `footer-section`, cumple una función informativa y estética, cerrando visualmente la página con coherencia y limpieza.
 
-·     La primera columna (col-md-4 col-sm-5) contiene un mensaje de derechos reservados que comunica la autoría y protección del contenido.
+- La primera columna (`col-md-4 col-sm-5`) contiene un mensaje de derechos reservados que comunica la autoría y protección del contenido.La segunda columna (`col-md-8 col-sm-5 text-right`) incluye una lista horizontal de enlaces a posibles recursos adicionales como políticas, licencia o espacio de discusión. Aunque estos enlaces son actualmente estáticos, están estructurados para que puedan activarse o personalizarse en futuras versiones del proyecto.
+- La segunda columna (`col-md-8 col-sm-5 text-right`) incluye una lista horizontal de enlaces a posibles recursos adicionales como políticas, licencia o espacio de discusión. Aunque estos enlaces son actualmente estáticos, están estructurados para que puedan activarse o personalizarse en futuras versiones del proyecto.
 
-·     La segunda columna (col-md-8 col-sm-5 text-right) incluye una lista horizontal de enlaces a posibles recursos adicionales como políticas, licencia o espacio de discusión. Aunque estos enlaces son actualmente estáticos, están estructurados para que puedan activarse o personalizarse en futuras versiones del proyecto.
-
-Además, se utilizan clases como mobile-center para garantizar una buena visualización en dispositivos móviles, asegurando que tanto el texto como los enlaces se centren o distribuyan adecuadamente según el ancho de pantalla. La disposición general es clara, funcional y profesional, acorde con el estilo general de la página.
+Además, se utilizan clases como `mobile-center` para garantizar una buena visualización en dispositivos móviles, asegurando que tanto el texto como los enlaces se centren o distribuyan adecuadamente según el ancho de pantalla. La disposición general es clara, funcional y profesional, acorde con el estilo general de la página.
 
  
 
-## **4.3**   **Mapa mundial con D3**
+### 4.3 Mapa mundial con D3
 
-Esta sección describe el funcionamiento y estructura del *script* mapa.js, responsable de generar el mapa interactivo donde se visualizan los aranceles aplicados por Estados Unidos a distintos países.
+Esta sección describe el funcionamiento y estructura del *script* `mapa.js`, responsable de generar el mapa interactivo donde se visualizan los aranceles aplicados por Estados Unidos a distintos países.
 
 Se ha incluido un mapa interactivo que muestra el nivel de arancel aplicado, codificado mediante una escala de color continua. El usuario puede interactuar con el gráfico desplazando el cursor sobre cada país para consultar el valor porcentual de los aranceles. Esta interacción mejora la comprensión del impacto de las políticas comerciales y permite analizar de forma comparativa las decisiones adoptadas por Estados Unidos respecto a sus socios comerciales.
 
+ 
 
+#### 4.3.1 Carga y configuración inicial del SVG
+
+El mapa se dibuja dentro de un elemento SVG que se inserta en el `div` con id `"mapa"`. Para ello, se definen previamente las dimensiones del contenedor y se aplica una proyección geográfica adecuada (`geoNaturalEarth1`) para representar el mundo de forma proporcionada.
+
+```javascript
+const widthMapa = 960;
+const heightMapa = 600;
+
+const svg = d3.select("#mapa")
+    .append("svg")
+    .attr("width", widthMapa)
+    .attr("height", heightMapa);
+
+const projection = d3.geoNaturalEarth1()
+    .scale(160)
+    .translate([widthMapa / 2, heightMapa / 2]);
+
+const path = d3.geoPath().projection(projection);
+```
+
+La función `d3.geoNaturalEarth1()` genera una proyección compatible con mapas de escala mundial, centrada y escalada a partir de las dimensiones definidas.
 
  
 
-### **4.3.1**    **Carga y configuración inicial del SVG**
+#### 4.3.2 Carga de los datos de aranceles
 
-El mapa se dibuja dentro de un elemento SVG que se inserta en el div con id "mapa". Para ello, se definen previamente las dimensiones del contenedor y se aplica una proyección geográfica adecuada (geoNaturalEarth1) para representar el mundo de forma proporcionada.
+Los datos se obtienen desde un archivo CSV llamado `aranceles_adaptados_d3.csv`, donde se recoge la información del porcentaje de arancel aplicado por Estados Unidos a cada país. Esta información se guarda en una estructura de tipo `Map`, utilizando el nombre del país como clave.
 
+```javascript
+let aranceles = new Map();
 
+d3.dsv(";", "assets/data/aranceles_adaptados_d3.csv").then(data => {
 
-  const widthMapa = 960;  const heightMapa = 600;     const svg = d3.select("#mapa")    .append("svg")    .attr("width", widthMapa)    .attr("height", heightMapa);     const projection = d3.geoNaturalEarth1()    .scale(160)    .translate([widthMapa / 2, heightMapa / 2]);     const path = d3.geoPath().projection(projection);  
-
-La función d3.geoNaturalEarth1() genera una proyección compatible con mapas de escala mundial, centrada y escalada a partir de las dimensiones definidas.
-
- 
-
-### **4.3.2**    **Carga de los datos de aranceles**
-
-Los datos se obtienen desde un archivo CSV llamado aranceles_adaptados_d3.csv, donde se recoge la información del porcentaje de arancel aplicado por Estados Unidos a cada país. Esta información se guarda en una estructura de tipo Map, utilizando el nombre del país como clave.
+    data.forEach(d => aranceles.set(d["Parámetro"], +d["Aranceles"]));
+    const valores = data.map(d => +d["Aranceles"]);
+```
 
 
 
-  let aranceles = new Map();     d3.dsv(";", "assets/data/aranceles_adaptados_d3.csv").then(data => {       data.forEach(d => aranceles.set(d["Parámetro"], +d["Aranceles"]));    const valores = data.map(d => +d["Aranceles"]);  
+Una vez cargados los datos, se calcula el valor mínimo y máximo de los aranceles, para generar una escala de color continua (`d3.scaleSequential`) que se utilizará para colorear los países según su valor.
 
- 
+```javascript
+    const minArancel = d3.min(valores);
+    const maxArancel = d3.max(valores);
 
-Una vez cargados los datos, se calcula el valor mínimo y máximo de los aranceles, para generar una escala de color continua (d3.scaleSequential) que se utilizará para colorear los países según su valor.
+    const colorScale = d3.scaleSequential()
+        .domain([minArancel, maxArancel])
+        .interpolator(d3.interpolateTurbo)
+        .clamp(true);
+```
 
 
 
-​    const minArancel =  d3.min(valores);    const maxArancel =  d3.max(valores);       const colorScale =  d3.scaleSequential()      .domain([minArancel, maxArancel])      .interpolator(d3.interpolateTurbo)      .clamp(true);  
-
- 
-
-### **4.3.3**    **Leyenda del mapa**
+#### 4.3.3 Leyenda del mapa
 
 Para interpretar los colores del mapa, se incorpora una leyenda generada mediante la función reutilizable Legend, que será explicada en el apartado **4.4**. Esta leyenda se posiciona en la esquina inferior derecha del SVG y adapta dinámicamente su escala al rango de valores del conjunto de datos.
+
+
+
+```javascript
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
 
 
 
@@ -283,15 +315,27 @@ Para interpretar los colores del mapa, se incorpora una leyenda generada mediant
 
  
 
-​     
+![Leyenda_mapa](docs/images/Leyenda_mapa.png)
 
-Figura 2. Leyenda del mapa
+<center><i>Figura 2. Leyenda del mapa</i></center>
+
+
 
  
 
-### **4.3.4**    **Representación del mapa**
+#### 4.3.4 Representación del mapa
 
 El mapa mundial se construye a partir de un fichero GeoJSON remoto, que contiene las fronteras geográficas de los países. Cada país se representa como una ruta (<path>), a la cual se le asigna un color en función de su valor de arancel.
+
+
+
+```javascript
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
 
 
 
@@ -303,21 +347,33 @@ Cada país recibe el color correspondiente a su valor de arancel, y los que no t
 
  
 
-### **4.3.5**    **Interactividad con tooltip**
+#### 4.3.5 Interactividad con tooltip
 
 Se ha añadido un sistema de interacción que permite mostrar un *tooltip* con el nombre del país y su arancel correspondiente cuando el usuario pasa el cursor por encima. El *tooltip* se desplaza dinámicamente con el cursor.
 
 
 
+```javascript
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
+
+
+
 ​          .on("mouseover", function (event, d) {            const nombre = d.properties.name;            const valor =  aranceles.get(nombre);               d3.select(this).classed("highlight", true);               tooltip              .style("opacity",  1)              .html(`<strong>${nombre}</strong><br>${valor != null ? valor + "%" : "Sin  datos"}`);          })          .on("mousemove", function (event) {              tooltip                .style("left", `${event.pageX + 10}px`)              .style("top", `${event.pageY - 28}px`);          })          .on("mouseout", function () {            d3.select(this).classed("highlight",  false);            tooltip.style("opacity", 0);          });  
 
- 
 
-​     
 
-Figura 3. Tooltip del mapa desplegado
 
- 
+
+![Tooltip_mapa](docs/images/Tooltip_mapa.png)
+
+<center><i>Figura 3. Tooltip del mapa desplegado</i></center>
+
+
 
 Este sistema mejora la experiencia del usuario al permitir la exploración individual de cada país con detalle y sin sobrecargar el mapa con etiquetas visibles.
 
@@ -327,13 +383,15 @@ Este sistema mejora la experiencia del usuario al permitir la exploración indiv
 
 La siguiente imagen muestra una vista general del mapa interactivo, donde se representan los aranceles aplicados por Estados Unidos mediante una escala cromática continua.
 
-​     
 
-Figura 4. Mapa interactivo
+
+<img src="docs/images/Mapa.png" alt="Mapa" style="zoom:67%;" />
+
+<center><i>Figura 4. Mapa interactivo</i></center>
 
  
 
-### **4.3.6**    **Legend.js**
+#### 4.3.6 Legend.js
 
 Para complementar las visualizaciones de datos, se ha desarrollado un módulo independiente llamado Legend.js, que contiene una función reutilizable encargada de generar de forma automática una leyenda continua basada en escalas de color interpoladas.
 
@@ -371,7 +429,7 @@ Gracias a este enfoque, el mantenimiento y la flexibilidad del proyecto aumentan
 
  
 
-## **4.4**   **Gráfico de barras con D3**
+### 4.4 Gráfico de barras con D3
 
 Para representar el volumen de exportaciones de bienes de la Unión Europea hacia diferentes países, se ha desarrollado un gráfico de barras. Esta visualización permite una comparación clara y eficaz entre los distintos socios comerciales, destacando visualmente la importancia de cada uno en términos de volumen exportado.
 
@@ -399,37 +457,51 @@ El siguiente fragmento de código muestra la estructura utilizada para construir
 
 
 
+```javascript
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
+
+
+
    gExport.selectAll(".bar")    .data(data)    .enter()    .append("rect")    .attr("class", "bar")    .attr("x", d => x(d["Parámetro"]))    .attr("y", d => y(d["€"]))    .attr("width", x.bandwidth())    .attr("height", d => heightExport - y(d["€"]))    .attr("fill", d => colorExport(d["€"]))       .on("mouseover",  function (event, d) {     d3.select(this)      .attr("stroke", "#000")      .attr("stroke-width",  1.5);        const nombre = d.Parámetro;     const valor = d["€"] * 1000;        tooltip      .style("opacity",  1)      .html(`<strong>${nombre}</strong><br>${valor.toLocaleString("es-ES")} millones €`);    })       .on("mousemove", function (event) {     tooltip      .style("left", (event.pageX + 10) + "px")      .style("top", (event.pageY - 28) + "px");    })       .on("mouseout", function () {     d3.select(this).attr("stroke", null);     tooltip.style("opacity", 0);    });  
 
  
 
 Este sistema de interacción mejora la experiencia del usuario, permitiéndole consultar valores exactos sin saturar el gráfico con etiquetas fijas, y facilita una exploración detallada de los principales destinos de las exportaciones de la Unión Europea.
 
-​     
 
-Figura 5. Gráfico de barras
+
+<img src="docs/images/Grafico_barras.png" alt="Grafico_barras" style="zoom: 67%;" />
+
+<center><i>Figura 5. Gráfico de barras</i></center>
+
+
 
  
 
 Al pasar el ratón sobre cualquier barra, se activa un tooltip emergente que proporciona detalles adicionales sobre las exportaciones específicas de cada país.
 
-​     
-
-Figura 6. Tooltip del gráfico de barras desplegado
 
 
+![Tooltip_barras](docs/images/Tooltip_barras.png)
+
+<center><i>Figura 6. Tooltip del gráfico de barras desplegado</i></center>
 
  
 
-## **4.5**   **Gráfico de tarta con D3**
+### 4.5 Gráfico de tarta con D3
 
 Para representar los principales productos que España exporta a Estados Unidos, se ha implementado un **gráfico de tarta** o **gráfico de sectores**. Esta visualización proporciona una visión intuitiva de la distribución de las categorías exportadoras, facilitando la comparación del peso relativo de cada tipo de producto en el volumen total.
 
  
 
-​     
+<img src="docs/images/Grafico_tarta_.png" alt="Grafico_tarta_" style="zoom: 67%;" />
 
-Figura 7. Gráfico de tarta
+<center><i>Figura 7. Gráfico de tarta</i></center>
 
  
 
@@ -451,29 +523,47 @@ A continuación, se añaden las etiquetas centradas cerca del borde de cada sect
 
 
 
+```javascript
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
+
+
+
 ​    const arc = d3.arc()      .innerRadius(0)      .outerRadius(radius - 10);       const arcLabel = d3.arc()      .innerRadius(radius * 0.75)      .outerRadius(radius * 0.75);       gArcs.append("path")      .attr("d", arc)      .attr("fill", d =>  colorPie(d.data.Categoría))      .on("mouseover",  function (event, d) {        d3.select(this).attr("stroke", "#000").attr("stroke-width",  1.5);        tooltip          .style("opacity", 1)          .html(`<strong>${d.data.Categoría}</strong><br>${d.data.Valor.toLocaleString("es-ES")} millones €`);      })      .on("mousemove", function (event) {        tooltip          .style("left", (event.pageX + 10) + "px")          .style("top", (event.pageY - 28) + "px");      })      .on("mouseout", function () {        d3.select(this).attr("stroke", null);        tooltip.style("opacity", 0);      });  
 
 Este sistema de interacción mejora notablemente la experiencia del usuario, permitiéndole consultar los datos detallados de cada categoría al pasar el cursor sobre el sector correspondiente.
 
-​     
 
-Figura 8. Tooltip del gráfico de tarta
+
+<img src="docs/images/Tooltip_tarta.png" alt="Tooltip_tarta" style="zoom: 80%;" />
+
+<center><i>Figura 8. Tooltip del gráfico de tarta</i></center>
+
+
 
 Además, se ha incorporado una leyenda bajo el gráfico, distribuida en dos columnas, que facilita la identificación rápida de los colores asociados a cada categoría exportadora.
 
-​     
 
-Figura 9. Leyenda del gráfico de tarta
+
+![Leyenda_grafico_tarta](docs/images/Leyenda_grafico_tarta.png)
+
+<center><i>Figura 9. Leyenda del gráfico de tarta</i></center>
+
+
 
  
 
-## **4.6**   **CSS**
+### 4.6 CSS
 
 Para lograr un diseño limpio, estructurado y responsive, se ha implementado una hoja de estilos personalizada que organiza y da formato a los diferentes apartados de la página web. El archivo style.css gestiona tanto la apariencia general de los textos y contenedores como el aspecto visual de los gráficos D3.
 
  
 
-### **4.6.1**    **Reset CSS**
+#### 4.6.1 Reset CSS
 
 Se aplica un *reset* general sobre elementos HTML básicos (como body, div, h1, p, ul, etc.) para eliminar márgenes, paddings y bordes predeterminados. De esta forma, se asegura una base homogénea en todos los navegadores.
 
@@ -481,26 +571,46 @@ Ejemplo de *reset* aplicado:
 
 
 
+```css
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
+
+
+
   html, body, div, span, applet, object, iframe,  h1, h2, h3, h4, h5, h6, p, blockquote, pre, a {    margin: 0;    padding: 0;    border: 0;    outline: 0;    vertical-align: baseline;    background: transparent;  }  
 
-### **4.6.2**    **Estilos comunes y utilidades**
+#### 4.6.2 Estilos comunes y utilidades
 
 Se definen clases genéricas como .no-padding, .no-margin, .relative, o .button, que se utilizan en diversas partes de la página para controlar espaciados y botones de acción.
 
  
 
-### **4.6.3**    **Estructura y disposición de la página**
+#### 4.6.3 Estructura y disposición de la página
 
 Cada sección principal (inicio, mapa, exportaciones UE, exportaciones España) cuenta con su propio espaciado vertical (padding-top) para lograr una separación visual clara entre bloques.
  La clase .alt-bg se utiliza para alternar fondos ligeramente coloreados en algunas secciones.
 
  
 
-### **4.6.4**    **Estilización específica de las visualizaciones**
+#### 4.6.4 Estilización específica de las visualizaciones
 
 Los contenedores de los gráficos D3 (#mapa, #barras_exportaciones, #graficoCircular) comparten un estilo homogéneo basado en flexbox, fondo blanco, bordes suaves y sombreados ligeros.
 
 Ejemplo:
+
+
+
+```css
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
 
 
 
@@ -512,7 +622,7 @@ Ejemplo:
 
  
 
-### **4.6.5**    **Elementos interactivos D3**
+#### 4.6.5 Elementos interactivos D3
 
 Se definen estilos para el mapa mundial interactivo:
 
@@ -524,19 +634,39 @@ También se define .highlight para remarcar visualmente un país o una barra cua
 
 
 
+```css
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
+
+
+
   .country {    stroke: #999;    stroke-width: 0.5;    transition: stroke 0.2s, stroke-width 0.2s, filter 0.2s;  }     .country:hover {    stroke: #000;    stroke-width: 1.2;    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));  }  
 
  
 
-### **4.6.6**    **Tooltips personalizados**
+#### 4.6.6 Tooltips personalizados
 
 Se han diseñado tooltips flotantes con aspecto limpio, fondo blanco, bordes redondeados y sombras suaves, adaptados a cada visualización:
 
 
 
+```css
+<script src ="https://d3js.org/d3.v6.min.js"></script>
+<script src ="assets/js/modules/legend.js" defer></script>
+<script src="assets/js/modules/mapa.js" defer></script>
+<script src="assets/js/modules/barras.js" defer></script>
+<script src="assets/js/modules/tarta.js" defer></script>
+```
+
+
+
   .tooltip {    position: absolute;    opacity: 0;    background: white;    border: 1px solid #ccc;    padding: 6px 10px;    border-radius: 4px;    font-size: 13px;    pointer-events: none;    transition: opacity 0.1s;    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);  }  
 
-### **4.6.7**    **Menú de navegación y footer**
+#### 4.6.7 Menú de navegación y footer
 
 La barra superior de navegación se mantiene fija (position: fixed) y está adaptada para dispositivos móviles.
 
@@ -546,7 +676,7 @@ El pie de página incluye enlaces secundarios y derechos de autor, todo estiliza
 
 
 
-**5.**  **CONCLUSIONES**
+## 5.  CONCLUSIONES
 
 La realización de esta actividad ha permitido integrar y aplicar de manera práctica los conocimientos adquiridos sobre visualización interactiva de datos en entornos web. A través del uso de la librería D3.js, se han desarrollado representaciones gráficas dinámicas que ofrecen una visión clara y comprensible de fenómenos complejos, como son los aranceles comerciales internacionales y los flujos de exportación entre regiones económicas.
 
@@ -562,8 +692,8 @@ Finalmente, cabe destacar que el desarrollo de esta actividad no solo ha reforza
 
  
 
-**Referencias**
+## Referencias
 
-**No hay ninguna fuente en el  documento actual.**
+
 
  
