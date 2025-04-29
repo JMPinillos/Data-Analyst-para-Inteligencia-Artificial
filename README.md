@@ -15,8 +15,9 @@
 
 <div align="center">
   	<a href="https://github.com/JMPinillos/Data-Analyst-para-Inteligencia-Artificial" target="_blank"><img src="https://img.shields.io/badge/Código-FF7F00?logo=JavaScript&logoColor=white"></a>
-  	<a href="https://https://github.com/JMPinillos/Data-Analyst-para-Inteligencia-Artificial" target="_blank"><img src="https://img.shields.io/badge/Página-09D9FD?logo=HTML5&logoColor=white"></a>
+  	<a href="https://jmpinillos.github.io/Data-Analyst-para-Inteligencia-Artificial/" target="_blank"><img src="https://img.shields.io/badge/Página-09D9FD?logo=HTML5&logoColor=white"></a>
 </div>
+
 
 
 
