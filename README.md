@@ -124,7 +124,7 @@ Todo el contenido se ha agrupado en una carpeta `assets`, que actúa como conten
 
 <p align="center"><img id="Figura_1" align="center" src="docs/images/Arbol_proyecto.png" alt="Arbol_proyecto" style="border: 1px solid black;"/></p>
 
-<center><i>Figura 1. Estructura del proyecto web</i></center>
+<p align="center"><i>Figura 1. Estructura del proyecto web</i></p>
 
 
 
@@ -333,9 +333,9 @@ Para interpretar los colores del mapa, se incorpora una leyenda generada mediant
 
  
 
-<img id="Figura_2" align="center" src="docs/images/Leyenda_mapa.png" alt="Leyenda_mapa" style="border: 1px solid black;"/>
+<p align="center"><img id="Figura_2" align="center" src="docs/images/Leyenda_mapa.png" alt="Leyenda_mapa" style="border: 1px solid black;"/></p>
 
-<center><i>Figura 2. Leyenda del mapa</i></center>
+<p align="center"><i>Figura 2. Leyenda del mapa</i></p>
 
  
 
@@ -395,9 +395,9 @@ Se ha añadido un sistema de interacción que permite mostrar un *tooltip* con e
 
 
 
-<img id="Figura_3" align="center" src="docs/images/Tooltip_mapa.png" alt="Tooltip_mapa" style="border: 1px solid black;"/>
+<p align="center"><img id="Figura_3" align="center" src="docs/images/Tooltip_mapa.png" alt="Tooltip_mapa" style="border: 1px solid black;"/></p>
 
-<center><i>Figura 3. Tooltip del mapa desplegado</i></center>
+<p align="center"><i>Figura 3. Tooltip del mapa desplegado</i></p>
 
 
 
@@ -407,9 +407,9 @@ La siguiente imagen muestra una vista general del mapa interactivo, donde se rep
 
 
 
-<img id="Figura_4" align="center" src="docs/images/Mapa.png" alt="Mapa" style="zoom:67%;border: 1px solid black;"/>
+<p align="center"><img id="Figura_4" align="center" src="docs/images/Mapa.png" alt="Mapa" style="zoom:67%;border: 1px solid black;"/></p>
 
-<center><i>Figura 4. Mapa interactivo</i></center>
+<p align="center"><i>Figura 4. Mapa interactivo</i></p>
 
  
 
@@ -514,9 +514,9 @@ Este sistema de interacción mejora la experiencia del usuario, permitiéndole c
 
 
 
-<img id="Figura_5" align="center" src="docs/images/Grafico_barras.png" alt="Grafico_barras" style="zoom: 67%; border: 1px solid black;" />
+<p align="center"><img id="Figura_5" align="center" src="docs/images/Grafico_barras.png" alt="Grafico_barras" style="zoom: 67%; border: 1px solid black;" /></p>
 
-<center><i>Figura 5. Gráfico de barras</i></center>
+<p align="center"><i>Figura 5. Gráfico de barras</i></p>
 
 
 
@@ -524,9 +524,9 @@ Al pasar el ratón sobre cualquier barra, se activa un tooltip emergente que pro
 
 
 
-<img id="Figura_6" align="center" src="docs/images/Tooltip_barras.png" alt="Tooltip_barras" style="border: 1px solid black;"/>
+<p align="center"><img id="Figura_6" align="center" src="docs/images/Tooltip_barras.png" alt="Tooltip_barras" style="border: 1px solid black;"/></p>
 
-<center><i>Figura 6. Tooltip del gráfico de barras desplegado</i></center>
+<p align="center"><i>Figura 6. Tooltip del gráfico de barras desplegado</i></p>
 
  
 
@@ -536,9 +536,9 @@ Para representar los principales productos que España exporta a Estados Unidos,
 
  
 
-<img id="Figura_7" align="center" src="docs/images/Grafico_tarta_.png" alt="Grafico_tarta_" style="zoom: 67%; border: 1px solid black;"/>
+<p align="center"><img id="Figura_7" align="center" src="docs/images/Grafico_tarta_.png" alt="Grafico_tarta_" style="zoom: 67%; border: 1px solid black;"/></p>
 
-<center><i>Figura 7. Gráfico de tarta</i></center>
+<p align="center"><i>Figura 7. Gráfico de tarta</i></p>
 
  
 
@@ -588,9 +588,9 @@ Este sistema de interacción mejora notablemente la experiencia del usuario, per
 
 
 
-<img id="Figura_8" align="center" src="docs/images/Tooltip_tarta.png" alt="Tooltip_tarta" style="zoom: 80%; border: 1px solid black;"/>
+<p align="center"><img id="Figura_8" align="center" src="docs/images/Tooltip_tarta.png" alt="Tooltip_tarta" style="zoom: 80%; border: 1px solid black;"/></p>
 
-<center><i>Figura 8. Tooltip del gráfico de tarta</i></center>
+<p align="center"><i>Figura 8. Tooltip del gráfico de tarta</i></p>
 
 
 
@@ -598,9 +598,9 @@ Además, se ha incorporado una leyenda bajo el gráfico, distribuida en dos colu
 
 
 
-<img id="Figura_9" align="center" src="docs/images/Leyenda_grafico_tarta.png" alt="Leyenda_grafico_tarta" style="border: 1px solid black;"/>
+<p align="center"><img id="Figura_9" align="center" src="docs/images/Leyenda_grafico_tarta.png" alt="Leyenda_grafico_tarta" style="border: 1px solid black;"/></p>
 
-<center><i>Figura 9. Leyenda del gráfico de tarta</i></center>
+<p align="center"><i>Figura 9. Leyenda del gráfico de tarta</i></p>
 
  
 
