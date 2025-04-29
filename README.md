@@ -1,6 +1,6 @@
 
 
-<p align="center"><img src="docs/Images/Logo_UNIR.png" alt="Logo_UNIR" /></p>
+<p align="center"><img src="docs/images/Logo_UNIR.png" alt="Logo_UNIR" /></p>
 <p align="center" style="font-family: 'Calibri Light'; font-size:30px">Universidad Internacional de La Rioja</p>
 <p align="center" style="font-family: 'Calibri Light'; font-size:26px">Escuela Superior de Ingeniería y Tecnología</center></p>
 
