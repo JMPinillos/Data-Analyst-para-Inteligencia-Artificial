@@ -195,9 +195,9 @@ La navegación principal está situada en la parte superior de la página y se p
 ```html
 <ul class="nav nav-list navbar-nav navbar-right">
     <li><a class="nav-item" href="#inicio">Inicio</a></li>
-    <li><a class="nav-item" href="#map">Mapa</a></li>
-    <li><a class="nav-item" href="#exportacionesUE">Aranceles</a></li>
-    <li><a class="nav-item" href="#exportacionesEspana">Exportaciones</a></li>
+    <li><a class="nav-item" href="#map">Impacto</a></li>
+		<li><a class="nav-item" href="#exportacionesUE">Comercio</a></li>
+		<li><a class="nav-item" href="#exportacionesEspana">España</a></li>
 </ul>
 ```
 
