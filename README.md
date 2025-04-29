@@ -9,7 +9,7 @@
 <p align="center" style="font-family: 'Calibri Light'; font-size:24px"><strong>Master en Inteligencia Artificial</strong></p>
 <p align="center" style="font-family: 'Calibri Light'; font-size:24px">Herramientas de visualización</p>
 
-<center><strong style="font-family: 'Calibri'; font-size:30px; color:#0098CD">Análisis de tendencias en D3.js</strong></center>
+<p align="center"><strong style="font-family: 'Calibri'; font-size:30px; color:#0098CD">Análisis de tendencias en D3.js</strong></p>
 
 
 
