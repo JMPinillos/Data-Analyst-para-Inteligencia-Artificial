@@ -122,7 +122,7 @@ Todo el contenido se ha agrupado en una carpeta `assets`, que actúa como conten
 
  
 
-<img id="Figura_1" align="center" src="docs/images/Arbol_proyecto.png" alt="Arbol_proyecto" style="border: 1px solid black;"/>
+<p align="center"><img id="Figura_1" align="center" src="docs/images/Arbol_proyecto.png" alt="Arbol_proyecto" style="border: 1px solid black;"/></p>
 
 <center><i>Figura 1. Estructura del proyecto web</i></center>
 
