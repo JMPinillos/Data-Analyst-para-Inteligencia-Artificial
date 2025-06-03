@@ -23,10 +23,7 @@
 
 
 <p align="center" style="font-family: 'Calibri Light'; font-size:18px">
-  Jose Manuel Pinillos Rubio<br>
-  Pablo Gómez Grande<br>
-  Álvaro Álvarez-Barriada Azaustre<br>
-  Francisco Rodrigo Cortinas Maseda
+  Jose Manuel Pinillos Rubio
 </p>
 
 
